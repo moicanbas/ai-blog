@@ -1,18 +1,10 @@
 import createMDX from "@next/mdx";
 
-const withMDX = createMDX({
+const withMDX = createMDX({});
 
-});
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-    pageExtensions: [
-        "ts",
-        "tsx",
-        "mdx"
-    ],
-    outputFileTracingIncludes: {
-        '/*': ['./content/posts/**/*'],
-    },
+  pageExtensions: ["ts", "tsx", "mdx"],
 };
 
 export default withMDX(nextConfig);

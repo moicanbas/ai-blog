@@ -1,60 +1,15 @@
-import fs from "node:fs";
-import path from "node:path";
-import matter from "gray-matter";
-import readingTime from "reading-time";
 import { Post } from "../types/post";
+import postsData from "./posts-data.json";
 
-const POSTS_PATH = path.join(process.cwd(), "content/posts");
-
-/**
- * Lee los directorios dentro de content/posts de forma nativa sin depender de globs
- */
-function getPostFolders(): string[] {
-  if (!fs.existsSync(POSTS_PATH)) {
-    return [];
-  }
-
-  return fs.readdirSync(POSTS_PATH, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name);
+export interface SinglePost extends Post {
+  featured: boolean;
+  content: string;
 }
 
-function readPost(slug: string) {
-  const fullPath = path.join(POSTS_PATH, slug, "index.mdx");
-
-  if (!fs.existsSync(fullPath)) {
-    throw new Error(`Post no encontrado en la ruta: ${fullPath}`);
-  }
-
-  const source = fs.readFileSync(fullPath, "utf8");
-
-  return {
-    slug,
-    source,
-  };
-}
-
-function parsePost(slug: string): Post {
-  const { source } = readPost(slug);
-  const { data, content } = matter(source);
-
-  return {
-    slug,
-    title: data.title,
-    description: data.description,
-    date: data.date,
-    category: data.category,
-    image: data.image,
-    author: data.author,
-    published: Boolean(data.published),
-    tags: data.tags ?? [],
-    readingTime: readingTime(content).text,
-  };
-}
+const allPosts: SinglePost[] = postsData as SinglePost[];
 
 export function getPosts(): Post[] {
-  return getPostFolders()
-    .map(parsePost)
+  return allPosts
     .filter((post) => post.published)
     .sort(
       (a, b) =>
@@ -62,24 +17,14 @@ export function getPosts(): Post[] {
     );
 }
 
-export function getPost(slug: string) {
-  const { source } = readPost(slug);
-  const { data, content } = matter(source);
+export function getPost(slug: string): SinglePost {
+  const post = allPosts.find((p) => p.slug === slug);
 
-  return {
-    slug,
-    title: data.title,
-    description: data.description,
-    author: data.author,
-    category: data.category,
-    image: data.image,
-    date: data.date,
-    featured: Boolean(data.featured),
-    published: Boolean(data.published),
-    tags: data.tags ?? [],
-    readingTime: readingTime(content).text,
-    content,
-  };
+  if (!post) {
+    throw new Error(`Post no encontrado para el slug: ${slug}`);
+  }
+
+  return post;
 }
 
 export function getFeaturedPosts(limit = 3): Post[] {

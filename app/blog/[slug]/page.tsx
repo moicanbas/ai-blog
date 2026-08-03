@@ -1,14 +1,15 @@
+// app/blog/[slug]/page.tsx
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { compileMDX } from "next-mdx-remote/rsc";
 
 import Container from "@/components/layout/Container";
 import ArticleHero from "@/components/blog/ArticleHero";
 import ArticleContent from "@/components/blog/ArticleContent";
 import ArticleFooter from "@/components/blog/ArticleFooter";
-import MDXComponents from "@/components/mdx/MDXComponents";
+import MDXRenderer from "@/components/mdx/MDXRenderer";
 
 import { getPost, getPosts } from "@/lib/posts";
+import { parseMDX } from "@/lib/mdx";
 
 interface Props {
   params: Promise<{
@@ -16,9 +17,9 @@ interface Props {
   }>;
 }
 
-// 🔴 OBLIGATORIO PARA CLOUDFLARE: Forzar a Next.js a no renderizar nada dinámicamente en runtime
-export const dynamic = "error"; // Si una ruta no se pre-renderiza en build, el build fallará en vez de romper en prod
-export const dynamicParams = false; // Retorna 404 de inmediato para slugs no generados en build
+// 🔴 GARANTÍA SR: Forzar a Next.js a compilar todas las páginas en el build (SSG puro)
+export const dynamic = "error";
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return getPosts().map((post) => ({
@@ -51,21 +52,20 @@ export default async function ArticlePage({ params }: Props) {
     notFound();
   }
 
-  // Se compila únicamente durante el 'npm run build'
-  const { content } = await compileMDX({
-    source: post.content,
-    components: MDXComponents,
-    options: {
-      parseFrontmatter: true,
-    },
-  });
+  // Serializamos el contenido en tiempo de build
+  const mdxSource = await parseMDX(post.content);
+
+  if (!mdxSource) {
+    notFound();
+  }
 
   return (
     <Container className="py-16">
       <ArticleHero post={post} />
 
       <ArticleContent>
-        {content}
+        {/* Renderizado ultra-seguro libre de eval() en runtime */}
+        <MDXRenderer source={mdxSource} />
       </ArticleContent>
 
       <ArticleFooter />

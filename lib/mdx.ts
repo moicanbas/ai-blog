@@ -1,16 +1,22 @@
-import { compileMDX } from "next-mdx-remote/rsc";
-import MDXComponents from "@/components/mdx/MDXComponents"; // Ajusta el path real donde esté tu MDXComponents
+// lib/mdx.ts
+import { serialize } from "next-mdx-remote/serialize";
+import remarkGfm from "remark-gfm"; // Opcional: para soporte de tablas/markdown extendido
 
-export async function parseMDX(source: string) {
-  if (!source) return null;
+export async function parseMDX(content: string) {
+  if (!content) return null;
 
-  const { content } = await compileMDX({
-    source,
-    components: MDXComponents,
-    options: {
-      parseFrontmatter: true,
-    },
-  });
+  try {
+    const mdxSource = await serialize(content, {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [],
+        format: "mdx",
+      },
+    });
 
-  return content;
+    return mdxSource;
+  } catch (error) {
+    console.error("Error serializando el contenido MDX:", error);
+    return null;
+  }
 }

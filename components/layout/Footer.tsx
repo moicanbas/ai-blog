@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div>
             <h3 className="font-bold text-foreground">
-              AI & Python Blog
+              IA & Python sin enredos
             </h3>
 
             <p className="mt-2 text-sm text-muted">

@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://tudominio.com"),
 
   title: {
-    default: "AI & Python Blog",
-    template: "%s | AI & Python Blog",
+    default: "IA & Python sin enredos",
+    template: "%s | IA & Python sin enredos",
   },
 
   description:
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   creator: "Moises Cantillo",
 
   openGraph: {
-    title: "AI & Python Blog",
+    title: "IA & Python sin enredos",
     description:
       "Explicaciones sencillas sobre IA, Python y tecnología.",
 
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 
     url: "https://tudominio.com",
 
-    siteName: "AI & Python Blog",
+    siteName: "IA & Python sin enredos",
 
     images: [
       {
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "AI & Python Blog",
+    title: "IA & Python sin enredos",
     description:
       "Aprende IA y Python desde cero.",
 

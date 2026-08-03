@@ -1,0 +1,47 @@
+---
+title: 'Embeddings: Cómo la IA entiende el significado de las cosas (La fábrica de vectores)'
+description: 'Aprende cómo las inteligencias artificiales traducen palabras e ideas a mapas matemáticos para entender conceptos, sinónimo y contexto sin tropezar con la sintaxis.'
+date: "2026-08-05"
+author: "Moises Cantillo"
+category: "Inteligencia Artificial"
+image: "/posts/embeddings.png"
+published: true
+featured: false
+tags:
+  - IA
+  - Embeddings
+  - Vectores
+  - Inteligencia Artificial
+  - Python
+---
+
+# Embeddings: Cómo la IA entiende el significado de las cosas (La fábrica de vectores)
+
+En las entregas anteriores descubrimos que las Inteligencias Artificiales no piensan como un ser humano y que, para procesar nuestro idioma, primero dividen las oraciones en pequeños trozos llamados **tokens**.
+
+Sin embargo, aquí surge una paradoja fascinante: para una computadora, la palabra `"perro"` es solo una secuencia de caracteres sin significado real. Si buscas en un sistema tradicional la palabra *"canino"*, es muy probable que no encuentre nada si el texto exacto no contiene esas letras.
+
+Entonces, ¿cómo logra ChatGPT saber que *"perro"*, *"perrito"*, *"canino"* y *"el mejor amigo del hombre"* se refieren esencialmente a lo mismo?
+
+La respuesta reside en uno de los conceptos más poderosos y elegantes de la ciencia de datos moderna: **los Embeddings**.
+
+<Callout>
+
+**La idea central:** Un *embedding* es la traducción de un concepto humano a una posición en un mapa digital. Al convertir palabras e ideas en coordenadas, la IA no necesita leer letras; simplemente mide la distancia entre conceptos.
+
+Si dos ideas están cerca en el mapa, significan casi lo mismo.
+
+</Callout>
+
+---
+
+# El mapa de las frutas: Entendiendo el espacio vectorial
+
+Para entender cómo funciona sin marearnos con conceptos matemáticos, imaginemos que queremos organizar una tienda de comida en un mapa de dos ejes simples:
+
+1. **Eje horizontal (Dulce vs. Salado):** Cuanto más a la derecha, más dulce.
+2. **Eje vertical (Grande vs. Pequeño):** Cuanto más arriba, más grande.
+
+Si colocamos una **Manzana**, estará bastante a la derecha (dulce) y a una altura media (tamaño moderado). Si colocamos una **Pera**, el sistema la situará casi al lado de la manzana, porque comparten propiedades similares de dulzura y tamaño.
+
+En cambio, si colocamos una **Sandía**, estará muy arriba (grande) y a la derecha (dulce). Y si situamos un **Limón**, estará a la izquierda (ácido/salado) y abajo (pequeño).

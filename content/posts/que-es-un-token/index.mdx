@@ -1,0 +1,108 @@
+---
+title: 'Tokens: Por qué la IA cobra por "pedazos" de palabras (Y el impuesto al español)'
+description: 'Descubre qué son realmente los tokens, por qué los modelos de IA no leen palabras completas y por qué procesar un texto en español cuesta más caro y consume más memoria que en inglés.'
+date: "2026-08-04"
+author: "Moises Cantillo"
+category: "Inteligencia Artificial"
+image: "/posts/tokens-cover.png"
+published: true
+featured: false
+tags:
+  - IA
+  - Tokens
+  - ChatGPT
+  - Inteligencia Artificial
+  - Python
+---
+
+# Tokens: Por qué la IA cobra por "pedazos" de palabras (Y el impuesto al español)
+
+En el artículo anterior vimos que un modelo de lenguaje (LLM) no piensa: predice la siguiente palabra con base en patrones. Sin embargo, para que una computadora pueda hacer cálculos con el lenguaje humano, primero necesita convertir ese texto en algo que pueda medir.
+
+Y aquí viene la primera sorpresa: **las inteligencias artificiales no leen palabras completas ni letras sueltas. Leen tokens.**
+
+Si alguna vez has visto la tarifa de una API de OpenAI, Anthropic o Google, habrás notado que no te cobran por minutos de uso ni por MB descargados, sino por *"1 millón de tokens"*. 
+
+Pero, ¿qué es exactamente un token? ¿Por qué se inventó esta unidad? Y, sobre todo, ¿por qué los hispanohablantes pagamos un "impuesto silencioso" cada vez que le escribimos a la IA?
+
+<Callout>
+
+**En pocas palabras:** Un token es el bloque básico con el que la IA construye el lenguaje. Puede ser una palabra entera, una sílaba o simplemente unas cuantas letras. Es como si la IA leyera el texto usando piezas de Lego en lugar de oraciones completas.
+
+</Callout>
+
+---
+
+# Los bloques de Lego del lenguaje
+
+Imagina que intentas enseñarle a una computadora a leer. Si le enseñas palabra por palabra, la memoria se llenaría rápidamente: existen millones de palabras en el mundo y constantemente inventamos términos nuevos, tecnicismos o faltas de ortografía.
+
+Por otro lado, si le enseñas letra por letra (`a`, `b`, `c`...), la memoria estaría a salvo, pero la IA tendría que hacer un esfuerzo gigantesco para entender que la `c`, la `a`, la `s` y la `a` juntas forman la idea de un hogar.
+
+Para solucionar esto, los creadores de la IA inventaron un punto medio llamado **Tokenización** (utilizando algoritmos como *Byte-Pair Encoding* o BPE).
+
+En lugar de memorizar todo el diccionario o reducirlo a letras, la IA divide el texto en fragmentos frecuentes:
+
+* Palabras muy comunes se convierten en **1 solo token** (ejemplo: `sol`, `hola`, `cat`).
+* Palabras largas o menos comunes se dividen en **múltiples tokens** (ejemplo: `anti-constitu-cional-mente`).
+* Los espacios, signos de puntuación y emojís también cuentan como tokens independientes.
+
+Como regla general en inglés, **100 tokens equivalen aproximadamente a 75 palabras**. Pero esta regla tiene un gran "pero" cuando cambiamos de idioma.
+
+---
+
+# El "impuesto al español"
+
+Aquí es donde la historia se pone interesante (y un poco injusta). 
+
+Los modelos de lenguaje más importantes del mundo han sido entrenados mayoritariamente con texto en inglés (más del 80% de su contenido inicial). Como resultado, el "vocabulario de tokens" de la IA aprendió a comprimir las palabras en inglés de forma extremadamente eficiente.
+
+Veamos un ejemplo real de cómo procesa la IA una frase equivalente en ambos idiomas:
+
+### En inglés:
+> `"Artificial intelligence is transforming the world."`
+> 
+> **Resultado:** 6 palabras ➔ **7 tokens**.
+
+### En español:
+> `"La inteligencia artificial está transformando el mundo."`
+> 
+> **Resultado:** 7 palabras ➔ **12 tokens**.
+
+¿Notas la diferencia? Para expresar exactamente la misma idea, **el texto en español requirió casi un 70% más de tokens**.
+
+---
+
+# ¿Por qué ocurre esto?
+
+1. **Acentuación y caracteres especiales:** Las tildes (`á`, `é`, `í`), las comas y caracteres como la `ñ` no suelen estar integrados directamente en los tokens raíz más comunes, por lo que la IA se ve obligada a dividir la palabra para procesar la tilde por separado.
+2. **Conjugaciones verbales complejas:** En inglés los verbos varían muy poco (`walk`, `walked`, `walking`). En español un solo verbo tiene docenas de terminaciones (`camino`, `caminaba`, `caminaremos`, `caminaríamos`), lo que obliga al algoritmo a fragmentar la palabra en sufijos.
+3. **Menor representación en el entrenamiento:** Al haber menos volumen de texto en español en la fase inicial de optimización, el diccionario interno del modelo no agrupó tantas palabras completas en español como lo hizo en inglés.
+
+---
+
+# ¿En qué te afecta esto como usuario o desarrollador?
+
+Este "impuesto al español" no es solo una curiosidad teórica; tiene impactos prácticos directos en el día a día:
+
+* **Te cuesta más dinero:** Si construyes aplicaciones conectadas a la API de ChatGPT o Claude, cada solicitud en español consume más tokens, por lo que pagas más por la misma cantidad de información.
+* **La memoria de la IA se agota más rápido:** La "ventana de contexto" (el límite de texto que la IA puede recordar en una conversación) se mide en tokens, no en palabras. Una conversación larga en español llenará la memoria del modelo mucho antes que la misma charla en inglés.
+* **Responde un poco más lento:** Dado que los modelos generan respuestas token por token, producir un texto en español requiere más pasos de cálculo, lo que se traduce en mayor latencia.
+
+---
+
+# Consejos prácticos para optimizar tus prompts
+
+No hace falta que empieces a escribirle a la IA en inglés si no te sientes cómodo, pero entender la tokenización te da superpoderes para comunicarte mejor con ella:
+
+1. **Sé directo y conciso:** Evita rodeos innecesarios o introducciones largas. Cada palabra de adorno consume espacio de memoria y presupuesto.
+2. **Usa texto plano para instrucciones del sistema:** Si eres desarrollador y escribes el *System Prompt* de un bot, redactar las instrucciones técnicas internas en inglés te ahorrará hasta un 40% de tokens en cada llamada a la API, aunque la respuesta final de cara al usuario sea en español.
+3. **Aprovecha el formato Markdown:** Estructurar tu texto con listas, viñetas y títulos ayuda a que la IA identifique patrones con menos fragmentación de tokens.
+
+---
+
+# En conclusión
+
+Los tokens son el puente que conecta el lenguaje humano con la matemática de las computadoras. Entender que la IA lee en "trozos de palabras" nos ayuda a comprender por qué a veces comete errores con palabras largas, por qué cobran como cobran y cómo podemos optimizar nuestras interacciones.
+
+En el próximo artículo aprenderemos qué son los **Embeddings**: la tecnología que le permite a la IA saber que *"perro"* y *"canino"* significan casi lo mismo, sin importar las letras que los compongan.

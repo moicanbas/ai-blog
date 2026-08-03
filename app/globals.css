@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+}
+
+:root {
+  /* Fondo: Gris alabastro cálido y descansado */
+  --background: #f4f5f8;
+
+  /* Texto: Slate profundo para contraste nítido */
+  --foreground: #0f172a;
+
+  /* Tarjetas: Marfil marfil suave para dar tridimensionalidad */
+  --card: #fcfdfe;
+
+  /* Colores de acento refinados */
+  --primary: #6d28d9;
+  --secondary: #ea580c;
+
+  /* Bordes limpios */
+  --border: #e2e8f0;
+
+  /* Texto secundario */
+  --muted: #64748b;
+}
+
+.dark {
+  /* Fondo: Obsidiana azulado (evita el negro absoluto) */
+  --background: #0b0f17;
+
+  /* Texto: Blanco suave */
+  --foreground: #f1f5f9;
+
+  /* Tarjetas: Tono elevado con matriz azulada tipo Raycast/Linear */
+  --card: #151b26;
+
+  /* Acentos vibrantes para modo oscuro */
+  --primary: #8b5cf6;
+  --secondary: #fb923c;
+
+  /* Bordes */
+  --border: #232d3f;
+
+  /* Texto secundario */
+  --muted: #94a3b8;
+}
+
+/* Estilos base globales */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+
+/* Estilos tipográficos para MDX/Prose */
+.prose {
+  max-width: none;
+  color: var(--foreground);
+}
+
+.prose h1 {
+  @apply text-3xl sm:text-5xl font-black mt-12 mb-6 tracking-tight text-foreground;
+}
+
+.prose h3 {
+  @apply text-xl sm:text-2xl font-bold mt-8 mb-3 tracking-tight text-foreground;
+}
+
+.prose p {
+  @apply my-6 text-base sm:text-lg leading-relaxed sm:leading-8 text-foreground/80;
+}
+
+.prose h2 {
+  @apply text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground mt-14 mb-6;
+}
+
+.prose :where(a) {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.2s;
+}
+
+.prose :where(a):hover {
+  opacity: 0.8;
+}
+
+.prose strong {
+  @apply font-semibold text-foreground;
+}
+
+.prose ul,
+.prose ol {
+  @apply my-6 ml-6 space-y-2 text-foreground/90;
+}
+
+.prose ul {
+  @apply list-disc;
+}
+
+.prose ol {
+  @apply list-decimal;
+}
+
+.prose blockquote {
+  @apply my-6 rounded-r-xl border-y border-r border-l-4 border-border/40 border-l-primary bg-card/60 py-3 pr-4 pl-5 italic text-muted shadow-xs;
+}
+
+/* Código en línea (`code`) */
+.prose code {
+  @apply rounded-md border border-border bg-card px-1.5 py-0.5 font-mono text-sm font-medium text-primary;
+}
+
+/* Bloques de código multilínea (`pre code`) */
+.prose pre {
+  @apply my-6 overflow-x-auto rounded-2xl border border-border bg-card p-4 shadow-xs;
+}
+
+.prose pre code {
+  @apply border-none bg-transparent p-0 text-sm font-normal text-foreground;
+}
+
+.prose img {
+  @apply my-8 rounded-2xl border border-border shadow-xs;
+}
+
+.prose hr {
+  @apply my-10 border-border/60;
+}

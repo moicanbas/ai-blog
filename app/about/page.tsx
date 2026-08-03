@@ -1,0 +1,15 @@
+import Container from "@/components/layout/Container";
+import ArticleContent from "@/components/blog/ArticleContent";
+import { parseMDXFile } from "@/lib/mdx";
+
+export default async function AboutPage() {
+  const content = await parseMDXFile("pages/about.mdx");
+
+  return (
+    <Container className="py-20">
+      <ArticleContent>
+        {content}
+      </ArticleContent>
+    </Container>
+  );
+}

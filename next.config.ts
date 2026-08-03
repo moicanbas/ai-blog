@@ -5,17 +5,14 @@ const withMDX = createMDX({
 });
 
 const nextConfig = {
-
     pageExtensions: [
-
         "ts",
-
         "tsx",
-
         "mdx"
-
-    ]
-
+    ],
+    outputFileTracingIncludes: {
+        '/*': ['./content/posts/**/*'],
+    },
 };
 
 export default withMDX(nextConfig);

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Handshake } from "lucide-react";
 import Container from "./Container";
 
 export default function Footer() {
@@ -16,7 +17,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="flex gap-6 text-sm">
+          <div className="flex items-center gap-6 text-sm">
             <Link
               href="/"
               className="text-muted transition-colors hover:text-foreground"
@@ -37,6 +38,17 @@ export default function Footer() {
             >
               Sobre mí
             </Link>
+
+            {/* Enlace a UserRoundCheck */}
+            <a
+              href="https://www.linkedin.com/in/ing-mocaba/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Perfil de LinkedIn de Moisés Cantillo"
+              className="text-muted transition-colors hover:text-primary"
+            >
+              <Handshake className="h-5 w-5" />
+            </a>
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Post } from "../types/post";
 import postsData from "./posts-data.json";
 
@@ -6,7 +7,8 @@ export interface SinglePost extends Post {
   content: string;
 }
 
-const allPosts: SinglePost[] = postsData as SinglePost[];
+// Aseguramos el casteo explícito desde el JSON importado
+const allPosts: SinglePost[] = (postsData as unknown as SinglePost[]) || [];
 
 export function getPosts(): Post[] {
   return allPosts
@@ -20,21 +22,28 @@ export function getPosts(): Post[] {
 export function getPost(slug: string): SinglePost {
   const post = allPosts.find((p) => p.slug === slug);
 
-  if (!post) {
-    throw new Error(`Post no encontrado para el slug: ${slug}`);
+  if (!post || !post.published) {
+    // En lugar de hacer un throw Error genérico, Next.js renderizará la página 404
+    notFound();
   }
 
   return post;
 }
 
 export function getFeaturedPosts(limit = 3): Post[] {
-  return getPosts().slice(0, limit);
+  return allPosts
+    .filter((post) => post.published && post.featured)
+    .sort(
+      (a, b) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    .slice(0, limit);
 }
 
 export function getCategories(): string[] {
-  return [...new Set(getPosts().map((post) => post.category))];
+  return Array.from(new Set(getPosts().map((post) => post.category).filter(Boolean)));
 }
 
 export function getTags(): string[] {
-  return [...new Set(getPosts().flatMap((post) => post.tags))];
+  return Array.from(new Set(getPosts().flatMap((post) => post.tags || [])));
 }

@@ -1,39 +1,39 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { notFound } from "next/navigation";
 
 import Container from "@/components/layout/Container";
 import ArticleContent from "@/components/blog/ArticleContent";
 import MDXRenderer from "@/components/mdx/MDXRenderer";
+
 import { parseMDX } from "@/lib/mdx";
 
-// 🔴 GARANTÍA SR PARA CLOUDFLARE: Forzamos generación estática pura
+// Generación estática pura
 export const dynamic = "error";
 
+const ABOUT_PATH = path.join(
+  process.cwd(),
+  "content",
+  "pages",
+  "about.mdx"
+);
+
 export default async function AboutPage() {
-  // 1. Ruta exacta al archivo en tu estructura
-  const filePath = path.join(process.cwd(), "content", "pages", "about.mdx");
-  let rawContent = "";
+  let source: string;
 
   try {
-    if (!fs.existsSync(filePath)) {
-      console.error(`Archivo no encontrado en la ruta: ${filePath}`);
-      notFound();
-    }
-    rawContent = fs.readFileSync(filePath, "utf-8");
+    source = fs.readFileSync(ABOUT_PATH, "utf8");
   } catch (error) {
-    console.error("Error leyendo el archivo about.mdx:", error);
+    console.error("[About] No se pudo leer about.mdx", error);
     notFound();
   }
 
-  // 2. Serialización estática del MDX
-  const mdxSource = await parseMDX(rawContent);
+  const mdxSource = await parseMDX(source);
 
   if (!mdxSource) {
     notFound();
   }
 
-  // 3. Renderizado con el componente preparado para Client-Hydration
   return (
     <Container className="py-20">
       <ArticleContent>

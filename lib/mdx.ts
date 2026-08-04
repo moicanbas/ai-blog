@@ -1,22 +1,52 @@
-// lib/mdx.ts
 import { serialize } from "next-mdx-remote/serialize";
-import remarkGfm from "remark-gfm"; // Opcional: para soporte de tablas/markdown extendido
+
+import remarkGfm from "remark-gfm";
+
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
 
 export async function parseMDX(content: string) {
-  if (!content) return null;
+  if (!content?.trim()) {
+    return null;
+  }
 
   try {
-    const mdxSource = await serialize(content, {
+    return await serialize(content, {
       mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [],
         format: "mdx",
+
+        remarkPlugins: [remarkGfm],
+
+        rehypePlugins: [
+          rehypeSlug,
+
+          [
+            rehypeAutolinkHeadings,
+            {
+              behavior: "append",
+              properties: {
+                className: ["anchor"],
+                ariaLabel: "Enlace permanente",
+              },
+            },
+          ],
+
+          [
+            rehypePrettyCode,
+            {
+              theme: {
+                light: "github-light",
+                dark: "github-dark",
+              },
+              keepBackground: false,
+            },
+          ]
+        ],
       },
     });
-
-    return mdxSource;
   } catch (error) {
-    console.error("Error serializando el contenido MDX:", error);
+    console.error("[MDX] Error serializando contenido:", error);
     return null;
   }
 }

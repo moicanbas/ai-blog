@@ -8,8 +8,7 @@
     "build": "next build",
     "postbuild": "node scripts/build-posts.mjs",
     "start": "next start",
-    "lint": "eslint",
-    "deploy": "npm run build && npx wrangler pages deploy .next"
+    "lint": "eslint"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

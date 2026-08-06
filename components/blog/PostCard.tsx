@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaRegClock, FaRegCalendar } from "react-icons/fa6";
 import Card from "../ui/Card";
 
 interface Props {
@@ -12,51 +13,46 @@ interface Props {
   date: string;
 }
 
-export default function PostCard({
-  slug,
-  title,
-  description,
-  image,
-  category,
-  readingTime,
-  date,
-}: Props) {
+export default function PostCard({ slug, title, description, image, category, readingTime, date }: Props) {
   return (
-    <Link href={`/blog/${slug}`}>
+    <Link href={`/blog/${slug}`} className="group h-full block">
+      <Card className="flex flex-col h-full overflow-hidden border border-border/60 bg-card/50 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+        
+        <div className="relative overflow-hidden aspect-video">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
 
-      <Card className="overflow-hidden h-full">
-
-        <Image
-          src={image}
-          alt={title}
-          width={1200}
-          height={630}
-          className="aspect-video w-full object-cover transition duration-500 hover:scale-105"
-        />
-
-        <div className="p-6">
-
-          <span className="text-sm font-medium text-violet-500">
+        <div className="flex flex-col flex-1 p-6">
+          <span className="text-xs font-semibold uppercase tracking-wider text-primary">
             {category}
           </span>
 
-          <h3 className="mt-3 text-2xl font-bold">
+          <h3 className="mt-3 text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
             {title}
           </h3>
 
-          <p className="mt-4 text-zinc-600 dark:text-zinc-400">
+          <p className="mt-3 flex-1 text-sm text-muted-foreground line-clamp-3">
             {description}
           </p>
 
-          <div className="mt-6 flex justify-between text-sm text-zinc-500">
-            <span>{date}</span>
-            <span>{readingTime}</span>
+          <div className="mt-6 flex items-center justify-between border-t border-border/50 pt-4 text-xs font-medium text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <FaRegCalendar />
+              <span>{date}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <FaRegClock />
+              <span>{readingTime}</span>
+            </div>
           </div>
-
         </div>
 
       </Card>
-
     </Link>
   );
 }

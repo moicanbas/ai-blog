@@ -17,8 +17,6 @@ export default function MDXRenderer({ source }: MDXRendererProps) {
 
   if (!source) return null;
 
-  // Si aún no se ha montado en el cliente, renderizamos un skeleton/fallback
-  // Esto evita que el ejecutor del servidor choque con el 'useState' durante el prerender.
   if (!isMounted) {
     return (
       <div className="animate-pulse space-y-4 py-4">

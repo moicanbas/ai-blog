@@ -11,10 +11,10 @@ export default function AboutSection() {
           <div className="relative mx-auto">
             <div className="relative rounded-full border border-border bg-card p-2 shadow-lg">
               <Image
-                src="/avatar.jpg"
+                src="/avatar_2.jpeg"
                 alt="Autor"
-                width={380}
-                height={380}
+                width={420}
+                height={420}
                 className="rounded-full object-cover"
               />
             </div>

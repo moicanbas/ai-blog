@@ -9,7 +9,7 @@ export default function AboutPhoto() {
       {/* Contenedor tipo tarjeta */}
       <div className="relative aspect-[4/5] w-72 sm:w-80 overflow-hidden rounded-3xl border-4 border-card bg-card p-2 shadow-2xl">
         <Image
-          src="/avatar.jpg"
+          src="/avatar_2.jpeg"
           alt="Moisés Cantillo"
           width={380}
           height={475}

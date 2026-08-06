@@ -1,8 +1,8 @@
 import Container from "../layout/Container";
 
 const statsData = [
-  { value: "30+", label: "Artículos publicados" },
-  { value: "12K+", label: "Lectores mensuales" },
+  { value: "4", label: "Artículos publicados" },
+  { value: "200+", label: "Lectores mensuales" },
   { value: "IA & Py", label: "Enfoque principal" },
   { value: "100%", label: "Contenido práctico" },
 ];

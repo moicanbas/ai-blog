@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@import "tailwindcss";
-
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -10,54 +8,58 @@
   --color-secondary: var(--secondary);
   --color-border: var(--border);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted);
+  --color-primary-foreground: #ffffff;
+  --color-accent: var(--border);
 }
 
 :root {
   /* Fondo: Gris alabastro cálido y descansado */
-  --background: #f4f5f8;
+  --background: #f5f7f5;
 
   /* Texto: Slate profundo para contraste nítido */
-  --foreground: #0f172a;
+  --foreground: #1d2925;
 
   /* Tarjetas: Marfil marfil suave para dar tridimensionalidad */
-  --card: #fcfdfe;
+  --card: #ffffff;
 
   /* Colores de acento refinados */
-  --primary: #6d28d9;
-  --secondary: #ea580c;
+  --primary: #276354;
+  --secondary: #b75c47;
 
   /* Bordes limpios */
-  --border: #e2e8f0;
+  --border: #d7dfdb;
 
   /* Texto secundario */
-  --muted: #64748b;
+  --muted: #62726b;
 }
 
 .dark {
   /* Fondo: Obsidiana azulado (evita el negro absoluto) */
-  --background: #0b0f17;
+  --background: #151c19;
 
   /* Texto: Blanco suave */
-  --foreground: #f1f5f9;
+  --foreground: #edf3ee;
 
   /* Tarjetas: Tono elevado con matriz azulada tipo Raycast/Linear */
-  --card: #151b26;
+  --card: #202b25;
 
   /* Acentos vibrantes para modo oscuro */
-  --primary: #8b5cf6;
-  --secondary: #fb923c;
+  --primary: #8fc5ae;
+  --secondary: #edac97;
 
   /* Bordes */
-  --border: #232d3f;
+  --border: #35453c;
 
   /* Texto secundario */
-  --muted: #94a3b8;
+  --muted: #acbcb2;
 }
 
 /* Estilos base globales */
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-family: var(--font-geist), sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -139,3 +141,69 @@ body {
 .prose hr {
   @apply my-10 border-border/60;
 }
+
+.home-page {
+  background-image: linear-gradient(90deg, transparent calc(100% - 1px), color-mix(in srgb, var(--border) 32%, transparent) 1px);
+  background-size: 80px 100%;
+}
+
+.home-shell, .contact-section { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+.home-shell { display: grid; grid-template-columns: 1fr 0.9fr; gap: 100px; align-items: center; padding: 100px 0 112px; }
+.home-profile { display: flex; align-items: flex-end; gap: 18px; margin-bottom: 36px; }
+.home-avatar { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; object-position: center 25%; border: 4px solid var(--card); box-shadow: 0 0 0 1px var(--border); }
+.home-availability { display: inline-flex; align-items: center; gap: 8px; padding-bottom: 8px; color: var(--primary); font: 500 12px var(--font-mono), monospace; }
+.home-availability span { width: 8px; height: 8px; border-radius: 50%; background: #64a885; }
+.home-eyebrow, .home-section-heading > div > span { color: var(--primary); font: 600 11px var(--font-mono), monospace; }
+.home-intro h1 { max-width: 610px; margin: 18px 0 22px; font-size: 54px; line-height: 1.08; font-weight: 650; }
+.home-intro h1 em { color: var(--primary); font-style: normal; }
+.home-description, .contact-intro p { max-width: 440px; color: var(--muted); font-size: 17px; line-height: 1.7; }
+.home-about, .contact-intro a, .home-contact-jump { display: inline-flex; align-items: center; gap: 9px; color: var(--primary); font-size: 14px; font-weight: 650; }
+.home-about { margin-top: 26px; }
+.home-about:hover, .contact-intro a:hover, .home-contact-jump:hover { text-decoration: underline; text-underline-offset: 4px; }
+.home-section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 22px; }
+.home-section-heading h2 { margin-top: 6px; font-size: 26px; line-height: 1.2; font-weight: 650; }
+.home-index { color: var(--muted); font: 12px var(--font-mono), monospace; }
+.link-list { display: grid; gap: 10px; }
+.home-link { min-height: 80px; display: flex; align-items: center; gap: 16px; padding: 14px 18px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); transition: border-color .2s, transform .2s; }
+.home-link:hover { border-color: var(--primary); transform: translateX(4px); }
+.link-icon { width: 44px; height: 44px; flex: none; display: grid; place-items: center; border-radius: 4px; color: var(--primary); background: color-mix(in srgb, var(--primary) 10%, var(--card)); }
+.link-copy { min-width: 0; flex: 1; display: grid; gap: 4px; }
+.link-copy strong { font-size: 15px; font-weight: 650; }
+.link-copy small { color: var(--muted); font-size: 13px; }
+.link-arrow { flex: none; color: var(--muted); }
+.home-link-featured { border-color: var(--primary); }
+.home-contact-jump { margin-top: 24px; }
+.contact-section { scroll-margin-top: 100px; display: grid; grid-template-columns: .8fr 1fr; gap: 100px; padding: 72px 0 104px; border-top: 1px solid var(--border); }
+.contact-intro h2 { margin: 14px 0 18px; font-size: 36px; line-height: 1.15; font-weight: 650; }
+.contact-intro a { margin-top: 25px; }
+.contact-form, .contact-form label { display: grid; gap: 9px; }
+.contact-form { gap: 20px; }
+.contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.contact-form label { color: var(--foreground); font-size: 13px; font-weight: 650; }
+.contact-form input, .contact-form textarea { width: 100%; border: 1px solid var(--border); border-radius: 5px; background: var(--card); color: var(--foreground); padding: 12px 13px; font-size: 15px; font-weight: 400; outline: none; }
+.contact-form textarea { resize: vertical; min-height: 130px; }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent); }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted); opacity: .8; }
+.contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.contact-verification:empty { display: none; }
+.contact-status { color: var(--muted); font-size: 14px; line-height: 1.5; }
+.contact-form button { justify-self: start; display: inline-flex; align-items: center; gap: 12px; border-radius: 5px; background: #276354; color: white; padding: 13px 18px; font-size: 14px; font-weight: 650; }
+.contact-form button:hover:not(:disabled) { background: #19493d; }
+.contact-form button:disabled { opacity: .55; cursor: not-allowed; }
+
+@media (max-width: 800px) {
+  .home-shell { grid-template-columns: 1fr; gap: 64px; padding: 64px 0 72px; }
+  .home-intro h1 { font-size: 44px; }
+  .contact-section { grid-template-columns: 1fr; gap: 36px; padding: 56px 0 72px; }
+}
+@media (max-width: 480px) {
+  .home-shell, .contact-section { width: min(100% - 36px, 1120px); }
+  .home-shell { padding-top: 48px; gap: 52px; }
+  .home-intro h1 { font-size: 36px; }
+  .home-profile { margin-bottom: 28px; }
+  .home-avatar { width: 92px; height: 92px; }
+  .home-description, .contact-intro p { font-size: 16px; }
+  .contact-intro h2 { font-size: 30px; }
+  .contact-row { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .home-link { transition: none; } .home-link:hover { transform: none; } }

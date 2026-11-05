@@ -10,7 +10,7 @@ export default function Card({ children, className }: Props) {
   return (
     <article
       className={cn(
-        "rounded-3xl border border-border bg-card text-foreground shadow-xs transition-all duration-300 hover:shadow-md",
+        "rounded-md border border-border bg-card text-foreground transition-colors",
         className
       )}
     >

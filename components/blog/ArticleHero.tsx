@@ -37,13 +37,13 @@ export default function ArticleHero({ post }: Props) {
         </div>
       </div>
 
-      <div className="mt-12 overflow-hidden rounded-[2rem] border border-border/50 shadow-2xl shadow-primary/5">
+      <div className="mt-12 overflow-hidden rounded-md border border-border">
         <Image
           src={post.image}
           alt={post.title}
           width={1200}
           height={630}
-          className="aspect-video w-full object-cover transition-transform duration-700 hover:scale-105"
+          className="aspect-video w-full object-cover"
           priority
         />
       </div>

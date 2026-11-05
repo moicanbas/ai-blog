@@ -1,6 +1,6 @@
 import Link from "next/link";
 // Usamos FontAwesome 6 desde react-icons (ideal para marcas)
-import { FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa6"; 
+import { FaGithub, FaLinkedin, FaTiktok, FaYoutube } from "react-icons/fa6";
 import Container from "./Container";
 import Logo from "./Logo";
 
@@ -32,7 +32,7 @@ export default function Footer() {
               href="https://github.com/moicanbas" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="rounded-full bg-muted p-2.5 text-muted-foreground transition-all duration-300 hover:bg-foreground/10 hover:text-foreground hover:scale-110"
+              className="rounded-md p-2.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
             >
               <FaGithub className="text-lg" />
               <span className="sr-only">GitHub</span>
@@ -43,18 +43,28 @@ export default function Footer() {
               href="https://www.linkedin.com/in/ing-mocaba/" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="rounded-full bg-muted p-2.5 text-muted-foreground transition-all duration-300 hover:bg-[#0a66c2]/10 hover:text-[#0a66c2] hover:scale-110"
+              className="rounded-md p-2.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
             >
               <FaLinkedin className="text-lg" />
               <span className="sr-only">LinkedIn</span>
             </a>
             
+            <a
+              href="https://www.tiktok.com/@mocadevia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md p-2.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+            >
+              <FaTiktok className="text-lg" />
+              <span className="sr-only">TikTok</span>
+            </a>
+
             {/* YouTube - Link con autososcribe y Hover color marca */}
             <a 
               href="https://www.youtube.com/@mocadevia?sub_confirmation=1" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="rounded-full bg-muted p-2.5 text-muted-foreground transition-all duration-300 hover:bg-red-500/10 hover:text-red-500 hover:scale-110"
+              className="rounded-md p-2.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
             >
               <FaYoutube className="text-lg" />
               <span className="sr-only">YouTube</span>

@@ -15,12 +15,11 @@ export default function Badge({
         <span
             className="
             rounded-full
-            bg-violet-100
+            bg-primary/10
             px-3
             py-1
             text-sm
-            text-violet-700
-            dark:bg-violet-900/30
+            text-primary
         "
         >
 

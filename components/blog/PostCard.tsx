@@ -16,14 +16,14 @@ interface Props {
 export default function PostCard({ slug, title, description, image, category, readingTime, date }: Props) {
   return (
     <Link href={`/blog/${slug}`} className="group h-full block">
-      <Card className="flex flex-col h-full overflow-hidden border border-border/60 bg-card/50 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+      <Card className="flex flex-col h-full overflow-hidden hover:border-primary">
         
         <div className="relative overflow-hidden aspect-video">
           <Image
             src={image}
             alt={title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover"
           />
         </div>
 

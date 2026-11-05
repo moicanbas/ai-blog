@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Search, X } from "lucide-react";
 import Container from "@/components/layout/Container";
 import PostGrid from "@/components/blog/PostGrid";
 import { getPosts } from "@/lib/posts";
@@ -25,8 +26,8 @@ export default function BlogPage() {
 
   return (
     <Container>
-      <div className="py-20">
-        <h1 className="mb-6 text-6xl font-black">Blog</h1>
+      <div className="py-14 md:py-20">
+        <h1 className="mb-4 text-4xl font-bold md:text-5xl">Blog</h1>
         <p className="mb-10 max-w-2xl text-lg text-muted-foreground">
           Artículos sobre Inteligencia Artificial, Python y tecnología explicados
           con ejemplos sencillos.
@@ -35,26 +36,15 @@ export default function BlogPage() {
         {/* Input de Búsqueda */}
         <div className="relative mb-12 max-w-md">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-muted-foreground">
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+            <Search className="h-5 w-5" />
           </div>
           <input
             type="text"
+            aria-label="Buscar artículos"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar por título, tema o etiqueta..."
-            className="w-full rounded-xl border border-border/60 bg-background/50 py-3.5 pl-11 pr-10 text-sm text-foreground placeholder:text-muted-foreground transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="w-full rounded-md border border-border bg-card py-3.5 pl-11 pr-10 text-sm text-foreground placeholder:text-muted-foreground transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
           {searchQuery && (
             <button
@@ -62,9 +52,7 @@ export default function BlogPage() {
               className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground hover:text-foreground"
               aria-label="Limpiar búsqueda"
             >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="h-4 w-4" />
             </button>
           )}
         </div>
@@ -73,7 +61,7 @@ export default function BlogPage() {
         {filteredPosts.length > 0 ? (
           <PostGrid posts={filteredPosts} />
         ) : (
-          <div className="rounded-2xl border border-border/40 bg-accent/20 py-16 text-center">
+          <div className="border-t border-border py-12 text-center">
             <p className="text-lg font-medium text-foreground">
               No encontramos artículos para "{searchQuery}"
             </p>

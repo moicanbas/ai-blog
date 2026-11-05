@@ -15,12 +15,11 @@ export default function Callout({
         <div
             className="
 my-8
-rounded-2xl
+rounded-md
 border-l-4
-border-violet-500
-bg-violet-50
+border-primary
+bg-primary/10
 p-6
-dark:bg-violet-950/30
 "
         >
 

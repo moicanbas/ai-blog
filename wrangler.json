@@ -1,23 +1,13 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ai-blog",
-  "main": "worker/index.js",
   "compatibility_date": "2026-08-03",
   "compatibility_flags": [
     "nodejs_compat"
   ],
   "assets": {
-    "directory": "out",
-    "binding": "ASSETS",
-    "run_worker_first": ["/api/*"]
+    "directory": "out"
   },
-  "ratelimits": [
-    {
-      "name": "CONTACT_LIMITER",
-      "namespace_id": "1001",
-      "simple": { "limit": 5, "period": 60 }
-    }
-  ],
   "observability": {
     "enabled": false
   }
